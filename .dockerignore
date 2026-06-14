@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.local
+.env.*.local
+node_modules
+.next
+out
+build
+README.md
+*.md
+Dockerfile
+.dockerignore
+.vercel
+supabase
+tests
