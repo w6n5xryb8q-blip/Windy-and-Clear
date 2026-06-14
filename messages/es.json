@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "title": "Windy & Clear",
+    "langToggle": "English"
+  },
+  "home": {
+    "headline": "Conoce tu aire.",
+    "subheadline": "Calidad del aire en tiempo real para cada vecindario de Chicago — lenguaje claro, sin tecnicismos.",
+    "zipPlaceholder": "Ingresa tu código postal (ej. 60623)",
+    "zipSubmit": "Ver Aire",
+    "orChoose": "o elige tu vecindario",
+    "ejLabel": "Vecindario EJ",
+    "searchPlaceholder": "Buscar vecindarios..."
+  },
+  "status": {
+    "good": "El aire en {neighborhood} está limpio hoy.",
+    "moderate": "La calidad del aire en {neighborhood} es aceptable, pero los grupos sensibles deben tomar precauciones.",
+    "usg": "Los grupos sensibles en {neighborhood} pueden sentir efectos en su salud. Limita el tiempo al aire libre.",
+    "unhealthy": "Todos en {neighborhood} pueden experimentar efectos en la salud. Evita actividades prolongadas al aire libre.",
+    "veryUnhealthy": "Alerta de salud para {neighborhood}: evita actividades al aire libre.",
+    "hazardous": "Emergencia de salud en {neighborhood}. Quédate en casa.",
+    "noData": "No hay lectura actual de calidad del aire disponible para esta área.",
+    "tagGood": "Bueno",
+    "tagModerate": "Moderado",
+    "tagUsg": "Precaución",
+    "tagUnhealthy": "No saludable",
+    "tagVeryUnhealthy": "Muy no saludable",
+    "tagHazardous": "Peligroso",
+    "updatedAt": "Actualizado {time}"
+  },
+  "pollutants": {
+    "heading": "Qué hay en tu aire",
+    "pm25Name": "Partículas finas (PM2.5)",
+    "pm25Desc": "Partículas diminutas de vehículos, sitios industriales e incendios que llegan profundo a tus pulmones. Pueden empeorar el asma y las enfermedades del corazón.",
+    "ozoneName": "Ozono a nivel del suelo",
+    "ozoneDesc": "Se forma cuando la luz solar reacciona con el escape de autos y fábricas. Dificulta la respiración, especialmente para niños y adultos mayores.",
+    "pm10Name": "Partículas gruesas (PM10)",
+    "pm10Desc": "Partículas más grandes de polvo que irritan la nariz, la garganta y los pulmones.",
+    "no2Name": "Dióxido de nitrógeno (NO2)",
+    "no2Desc": "Proviene principalmente del escape de vehículos y plantas de energía. Irrita las vías respiratorias y aumenta el riesgo de infecciones.",
+    "coName": "Monóxido de carbono (CO)",
+    "coDesc": "Producido al quemar combustible. En niveles altos, reduce el oxígeno que la sangre puede transportar."
+  },
+  "permits": {
+    "heading": "Cerca de ti — Actividad reciente",
+    "noActivity": "No hay solicitudes de permisos industriales en los últimos 30 días.",
+    "daysAgo": "hace {days} días",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "viewNotice": "Ver aviso público"
+  },
+  "action": {
+    "heading": "Actúa Ahora",
+    "defaultAction": "Llama al 311 para reportar camiones en ralentí, olores fuertes o contaminación visible en tu vecindario.",
+    "defaultCta": "Llamar al 311",
+    "defaultCtaUrl": "tel:311",
+    "shareCta": "Compartir esta página"
+  },
+  "sms": {
+    "heading": "Recibe Alertas",
+    "body": "Te enviamos un mensaje de texto cuando la calidad del aire se vuelva peligrosa en tu área — un mensaje, sin spam.",
+    "phonePlaceholder": "Tu número de teléfono",
+    "submit": "Suscribirme",
+    "submitting": "Suscribiendo...",
+    "success": "Estás suscrito/a. Responde STOP en cualquier momento para cancelar.",
+    "error": "Algo salió mal. Por favor intenta de nuevo.",
+    "consent": "Al suscribirte, aceptas recibir alertas de calidad del aire. Pueden aplicar tarifas de mensajes y datos. Responde STOP para cancelar."
+  },
+  "report": {
+    "heading": "Reporta Algo",
+    "placeholder": "Describe lo que ves o hueles — una nube de polvo, olor fuerte, actividad de camiones cerca de una escuela...",
+    "submit": "Enviar Reporte",
+    "submitting": "Enviando...",
+    "success": "Reporte recibido. Gracias — tu observación ayuda a tu comunidad.",
+    "error": "No se pudo enviar el reporte. Por favor intenta de nuevo.",
+    "charCount": "{count}/1000"
+  },
+  "footer": {
+    "dataSource": "Datos de calidad del aire: EPA AirNow · Datos EJ: Ciudad de Chicago CIA 2023",
+    "about": "Acerca de",
+    "privacy": "Privacidad"
+  },
+  "errors": {
+    "invalidZip": "Por favor ingresa un código postal válido de 5 dígitos.",
+    "notFound": "Vecindario no encontrado. Intenta con un código postal.",
+    "apiError": "No se pueden cargar los datos de calidad del aire ahora. Por favor intenta de nuevo."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "nav": {
+    "title": "Windy & Clear",
+    "langToggle": "Español"
+  },
+  "home": {
+    "headline": "Know your air.",
+    "subheadline": "Real-time air quality for every Chicago neighborhood — plain language, no jargon.",
+    "zipPlaceholder": "Enter ZIP code (e.g. 60623)",
+    "zipSubmit": "Check Air",
+    "orChoose": "or choose your neighborhood",
+    "ejLabel": "EJ Neighborhood",
+    "searchPlaceholder": "Search neighborhoods..."
+  },
+  "status": {
+    "good": "The air in {neighborhood} is clean today.",
+    "moderate": "Air quality is acceptable in {neighborhood}, but sensitive groups should take care.",
+    "usg": "Sensitive groups in {neighborhood} may experience health effects. Limit time outdoors.",
+    "unhealthy": "Everyone in {neighborhood} may experience health effects. Avoid prolonged outdoor activity.",
+    "veryUnhealthy": "Health alert for {neighborhood}: avoid outdoor activity.",
+    "hazardous": "Health emergency in {neighborhood}. Stay indoors.",
+    "noData": "No current air quality reading available for this area.",
+    "tagGood": "Good",
+    "tagModerate": "Moderate",
+    "tagUsg": "Caution",
+    "tagUnhealthy": "Unhealthy",
+    "tagVeryUnhealthy": "Very Unhealthy",
+    "tagHazardous": "Hazardous",
+    "updatedAt": "Updated {time}"
+  },
+  "pollutants": {
+    "heading": "What's In Your Air",
+    "pm25Name": "Fine Particles (PM2.5)",
+    "pm25Desc": "Tiny particles from vehicles, industrial sites, and fires that reach deep into your lungs. Can worsen asthma and heart conditions.",
+    "ozoneName": "Ground-Level Ozone",
+    "ozoneDesc": "Forms when sunlight reacts with exhaust from cars and factories. Makes breathing harder, especially for children and older adults.",
+    "pm10Name": "Coarse Particles (PM10)",
+    "pm10Desc": "Larger dust and particles that irritate your nose, throat, and lungs.",
+    "no2Name": "Nitrogen Dioxide (NO2)",
+    "no2Desc": "Comes mainly from vehicle exhaust and power plants. Irritates airways and increases risk of respiratory infections.",
+    "coName": "Carbon Monoxide (CO)",
+    "coDesc": "Produced by burning fuel. At high levels, reduces the amount of oxygen your blood can carry."
+  },
+  "permits": {
+    "heading": "Near You — Recent Activity",
+    "noActivity": "No industrial permit applications in the last 30 days.",
+    "daysAgo": "{days}d ago",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "viewNotice": "View public notice"
+  },
+  "action": {
+    "heading": "Take Action",
+    "defaultAction": "Call 311 to report idling trucks, strong odors, or visible pollution in your neighborhood.",
+    "defaultCta": "Call 311",
+    "defaultCtaUrl": "tel:311",
+    "shareCta": "Share this page"
+  },
+  "sms": {
+    "heading": "Get Alerts",
+    "body": "We'll text you when air quality turns unhealthy in your area — one text, no spam.",
+    "phonePlaceholder": "Your phone number",
+    "submit": "Subscribe",
+    "submitting": "Subscribing...",
+    "success": "You're subscribed. Reply STOP anytime to cancel.",
+    "error": "Something went wrong. Please try again.",
+    "consent": "By subscribing, you agree to receive air quality alerts. Msg & data rates may apply. Reply STOP to cancel."
+  },
+  "report": {
+    "heading": "Report Something",
+    "placeholder": "Describe what you see or smell — a dust cloud, strong odor, truck activity near a school...",
+    "submit": "Send Report",
+    "submitting": "Sending...",
+    "success": "Report received. Thank you — your observation helps your community.",
+    "error": "Could not send report. Please try again.",
+    "charCount": "{count}/1000"
+  },
+  "footer": {
+    "dataSource": "Air quality data: EPA AirNow · EJ data: City of Chicago CIA 2023",
+    "about": "About",
+    "privacy": "Privacy"
+  },
+  "errors": {
+    "invalidZip": "Please enter a valid 5-digit ZIP code.",
+    "notFound": "Neighborhood not found. Try a ZIP code instead.",
+    "apiError": "Unable to load air quality data right now. Please try again."
+  }
+}
