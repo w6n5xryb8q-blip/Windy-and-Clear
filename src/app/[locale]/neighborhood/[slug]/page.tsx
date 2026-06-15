@@ -5,6 +5,7 @@ import { getNeighborhoodBySlug, neighborhoods } from '@/data/neighborhoods';
 import { fetchAirQuality } from '@/lib/airnow';
 import { fetchPermits } from '@/lib/permits';
 import AirStatusCard from '@/components/air-status/AirStatusCard';
+import SafetyPrecautions from '@/components/safety/SafetyPrecautions';
 import PollutantList from '@/components/pollutants/PollutantList';
 import PermitFeed from '@/components/permits/PermitFeed';
 import TakeActionBlock from '@/components/take-action/TakeActionBlock';
@@ -65,6 +66,8 @@ export default async function NeighborhoodPage({ params }: Props) {
         neighborhoodName={hoodName}
         locale={locale}
       />
+
+      <SafetyPrecautions category={airData.overallCategory} locale={locale} />
 
       {airData.dataAvailable && airData.pollutants.length > 0 && (
         <PollutantList pollutants={airData.pollutants} locale={locale} />
