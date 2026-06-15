@@ -23,6 +23,8 @@ export async function POST(request: NextRequest) {
     if (!success) {
       return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 });
     }
+  } else {
+    console.warn('UPSTASH_REDIS_REST_URL not set — rate limiting is disabled for /api/subscribe');
   }
 
   let body: unknown;

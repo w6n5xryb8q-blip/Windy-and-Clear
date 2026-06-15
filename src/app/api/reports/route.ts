@@ -23,6 +23,8 @@ export async function POST(request: NextRequest) {
     if (!success) {
       return NextResponse.json({ error: 'Too many reports. Try again later.' }, { status: 429 });
     }
+  } else {
+    console.warn('UPSTASH_REDIS_REST_URL not set — rate limiting is disabled for /api/reports');
   }
 
   let body: unknown;
@@ -50,8 +52,8 @@ export async function POST(request: NextRequest) {
         language,
         zip_code: zipCode ?? null,
         ip_hash: ipHash,
-        is_moderated: true,
-        is_visible: true,
+        is_moderated: false,   // pending review
+        is_visible: false,     // hidden until moderated
       })
       .select('id, created_at')
       .single();
