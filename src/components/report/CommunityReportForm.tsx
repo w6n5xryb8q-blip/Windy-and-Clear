@@ -55,35 +55,43 @@ export default function CommunityReportForm({ neighborhoodSlug, locale }: Props)
 
   if (status === 'success') {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-5">
-        <p className="text-green-800 text-sm font-medium">✓ {s.success}</p>
+      <div className="border-l-[5px] border-cobalt bg-white p-5">
+        <p className="text-sm font-medium text-cobalt">{s.success}</p>
       </div>
     );
   }
 
   return (
-    <div className="border border-gray-200 rounded-2xl p-5 bg-white/60">
-      <h3 className="text-xs font-bold tracking-widest uppercase text-gray-500 mb-3">{s.heading}</h3>
+    <div className="border border-cobalt/20 bg-white p-5">
+      <h3
+        className="text-[10px] font-semibold uppercase text-cobalt mb-3"
+        style={{ letterSpacing: '0.15em' }}
+      >
+        {s.heading}
+      </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, 1000))}
           placeholder={s.placeholder}
           rows={3}
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-navy focus:outline-none text-navy text-sm resize-none"
+          className="w-full px-4 py-3 border border-cobalt/30 focus:border-cobalt focus:outline-none text-darkblue text-sm resize-none bg-almond placeholder-darkblue/30"
           disabled={status === 'loading'}
         />
         <div className="flex items-center justify-between">
-          <span className="text-xs text-gray-400">{s.charCount(text.length)}</span>
+          <span className="text-[11px] text-darkblue/40">{s.charCount(text.length)}</span>
           <button
             type="submit"
             disabled={status === 'loading' || text.trim().length < 10}
-            className="bg-navy text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-navy/90 disabled:opacity-40 transition-colors"
+            className="bg-cobalt text-almond text-sm font-semibold px-5 py-2 hover:bg-darkblue disabled:opacity-40 transition-colors uppercase"
+            style={{ letterSpacing: '0.08em' }}
           >
             {status === 'loading' ? s.submitting : s.submit}
           </button>
         </div>
-        {status === 'error' && <p className="text-red-600 text-sm">{s.error}</p>}
+        {status === 'error' && (
+          <p className="text-fuchsia text-sm font-medium">{s.error}</p>
+        )}
       </form>
     </div>
   );

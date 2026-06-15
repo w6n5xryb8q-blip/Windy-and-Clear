@@ -48,10 +48,13 @@ export default async function NeighborhoodPage({ params }: Props) {
 
   return (
     <div className="pt-6 space-y-5">
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-sm text-gray-500">{hoodName}</span>
+      <div className="flex items-center gap-3 mb-2">
+        <span className="text-sm font-light text-darkblue/60">{hoodName}</span>
         {hood.isEj && (
-          <span className="text-xs font-semibold bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full">
+          <span
+            className="text-[9px] font-semibold border border-fuchsia text-fuchsia px-2 py-0.5 uppercase"
+            style={{ letterSpacing: '0.12em' }}
+          >
             {t('home.ejLabel')}
           </span>
         )}

@@ -14,11 +14,13 @@ export default function PermitFeed({ permitsData, locale }: Props) {
     : 'No industrial permit applications in the last 30 days.';
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5">
-      <h3 className="text-xs font-bold tracking-widest uppercase text-navy mb-4">{heading}</h3>
+    <div className="bg-white border border-cobalt/20 p-5">
+      <h3 className="text-[10px] font-semibold tracking-label uppercase text-cobalt mb-4">
+        {heading}
+      </h3>
 
       {!permitsData.dataAvailable || permitsData.permits.length === 0 ? (
-        <p className="text-sm text-gray-400 italic">{noActivity}</p>
+        <p className="text-[13px] text-darkblue/40 italic">{noActivity}</p>
       ) : (
         <ul className="space-y-4">
           {permitsData.permits.map((permit) => {
@@ -33,14 +35,16 @@ export default function PermitFeed({ permitsData, locale }: Props) {
             }
 
             return (
-              <li key={permit.id} className="border-l-2 border-amber pl-3">
-                <p className="text-sm font-medium text-navy leading-snug">
+              <li key={permit.id} className="border-l-[3px] border-cobalt pl-3">
+                <p className="text-sm font-medium text-darkblue leading-snug">
                   {permit.workDescription}
                 </p>
                 {permit.address && (
-                  <p className="text-xs text-gray-500 mt-0.5">{permit.address}</p>
+                  <p className="text-[12px] text-darkblue/50 mt-0.5">{permit.address}</p>
                 )}
-                <p className="text-xs text-gray-400 mt-1">{timeAgo}</p>
+                <p className="text-[11px] text-darkblue/40 mt-1 uppercase tracking-wide font-medium">
+                  {timeAgo}
+                </p>
               </li>
             );
           })}

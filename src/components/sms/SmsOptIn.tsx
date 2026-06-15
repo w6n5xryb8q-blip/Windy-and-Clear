@@ -53,34 +53,39 @@ export default function SmsOptIn({ zip, locale }: Props) {
 
   if (status === 'success') {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-5">
-        <p className="text-green-800 text-sm font-medium">✓ {s.success}</p>
+      <div className="border-l-[5px] border-cobalt bg-white p-5">
+        <p className="text-sm font-medium text-cobalt">{s.success}</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5">
-      <h3 className="text-xs font-bold tracking-widest uppercase text-navy mb-2">{s.heading}</h3>
-      <p className="text-sm text-gray-500 mb-4">{s.body}</p>
+    <div className="bg-white border border-cobalt/20 p-5">
+      <h3 className="text-[10px] font-semibold uppercase text-cobalt mb-2" style={{ letterSpacing: '0.15em' }}>
+        {s.heading}
+      </h3>
+      <p className="text-[13px] text-darkblue/60 mb-4">{s.body}</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder={s.placeholder}
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-navy focus:outline-none text-navy text-base"
+          className="w-full px-4 py-3 border border-cobalt/30 focus:border-cobalt focus:outline-none text-darkblue text-base bg-almond placeholder-darkblue/30"
           disabled={status === 'loading'}
         />
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="bg-navy text-white font-semibold py-3 rounded-xl hover:bg-navy/90 disabled:opacity-60 transition-colors"
+          className="bg-cobalt text-almond font-semibold py-3 px-5 hover:bg-darkblue disabled:opacity-60 transition-colors uppercase text-sm"
+          style={{ letterSpacing: '0.08em' }}
         >
           {status === 'loading' ? s.submitting : s.submit}
         </button>
-        {status === 'error' && <p className="text-red-600 text-sm">{s.error}</p>}
-        <p className="text-xs text-gray-400">{s.consent}</p>
+        {status === 'error' && (
+          <p className="text-fuchsia text-sm font-medium">{s.error}</p>
+        )}
+        <p className="text-[11px] text-darkblue/40 leading-relaxed">{s.consent}</p>
       </form>
     </div>
   );

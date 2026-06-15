@@ -18,17 +18,25 @@ function HomeContent() {
 
   return (
     <div className="pt-8 pb-4">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-navy mb-2">{t('headline')}</h1>
-        <p className="text-gray-600 text-base leading-relaxed">{t('subheadline')}</p>
+      {/* DS display heading: light weight, tight tracking, dark blue */}
+      <div className="mb-8 border-l-[5px] border-cobalt pl-4">
+        <h1 className="text-3xl font-light text-darkblue tracking-tight leading-tight mb-2">
+          {t('headline')}
+        </h1>
+        <p className="text-[14px] text-darkblue/60 leading-relaxed">{t('subheadline')}</p>
       </div>
 
       <ZipInput />
 
       <div className="flex items-center gap-3 my-6">
-        <div className="h-px flex-1 bg-gray-300" />
-        <span className="text-sm text-gray-500">{t('orChoose')}</span>
-        <div className="h-px flex-1 bg-gray-300" />
+        <div className="h-px flex-1 bg-cobalt/15" />
+        <span
+          className="text-[10px] font-semibold text-darkblue/40 uppercase"
+          style={{ letterSpacing: '0.15em' }}
+        >
+          {t('orChoose')}
+        </span>
+        <div className="h-px flex-1 bg-cobalt/15" />
       </div>
 
       <NeighborhoodPicker />

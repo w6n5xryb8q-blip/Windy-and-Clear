@@ -2,20 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --background: #F5ECD7;
-  --foreground: #1a2340;
+  --background: #E8DED2;
+  --foreground: #00028E;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --tracking-label: 0.15em;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .tracking-label {
+    letter-spacing: 0.15em;
   }
 }

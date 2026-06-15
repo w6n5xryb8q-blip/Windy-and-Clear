@@ -43,8 +43,8 @@ export default function PollutantList({ pollutants, locale }: Props) {
   const top = pollutants.slice(0, 3);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5">
-      <h3 className="text-xs font-bold tracking-widest uppercase text-navy mb-4">
+    <div className="bg-white border border-cobalt/20 p-5">
+      <h3 className="text-[10px] font-semibold tracking-label uppercase text-cobalt mb-4">
         {locale === 'es' ? 'Qué hay en tu aire' : "What's In Your Air"}
       </h3>
       <ul className="space-y-4">
@@ -57,13 +57,15 @@ export default function PollutantList({ pollutants, locale }: Props) {
           return (
             <li key={p.parameterName} className="flex items-start gap-3">
               <div
-                className="w-3 h-3 rounded-full mt-1 shrink-0"
+                className="w-2.5 h-2.5 mt-1 shrink-0"
                 style={{ backgroundColor: meta.colorHex }}
                 aria-hidden
               />
               <div>
-                <p className="text-sm font-semibold text-navy">{name}</p>
-                {description && <p className="text-sm text-gray-500 mt-0.5 leading-snug">{description}</p>}
+                <p className="text-sm font-medium text-darkblue">{name}</p>
+                {description && (
+                  <p className="text-[13px] text-darkblue/60 mt-0.5 leading-snug">{description}</p>
+                )}
               </div>
             </li>
           );

@@ -30,18 +30,21 @@ export default function NeighborhoodPicker() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={t('searchPlaceholder')}
-        className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-300 focus:border-navy focus:outline-none bg-white text-navy placeholder-gray-400 mb-3"
+        className="w-full px-4 py-2.5 text-sm border border-cobalt/30 focus:border-cobalt focus:outline-none bg-white text-darkblue placeholder-darkblue/30 mb-0"
       />
-      <ul className="max-h-72 overflow-y-auto rounded-xl border border-gray-200 bg-white divide-y divide-gray-100">
+      <ul className="max-h-72 overflow-y-auto border border-t-0 border-cobalt/20 bg-white divide-y divide-cobalt/10">
         {filtered.map((hood) => (
           <li key={hood.slug}>
             <button
               onClick={() => router.push(`/${locale}/neighborhood/${hood.slug}`)}
-              className="w-full text-left px-4 py-3 hover:bg-almond active:bg-amber/10 transition-colors flex items-center justify-between gap-2"
+              className="w-full text-left px-4 py-3 hover:bg-almond transition-colors flex items-center justify-between gap-2"
             >
-              <span className="text-sm font-medium text-navy">{hood.name}</span>
+              <span className="text-sm font-medium text-darkblue">{hood.name}</span>
               {hood.isEj && (
-                <span className="shrink-0 text-xs font-semibold bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">
+                <span
+                  className="shrink-0 text-[9px] font-semibold border border-fuchsia text-fuchsia px-2 py-0.5 uppercase"
+                  style={{ letterSpacing: '0.12em' }}
+                >
                   {t('ejLabel')}
                 </span>
               )}
