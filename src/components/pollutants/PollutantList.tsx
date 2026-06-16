@@ -1,42 +1,16 @@
 import type { PollutantReading } from '@/lib/airnow';
 import { getAqiMeta } from '@/lib/aqi-utils';
+import { POLLUTANT_DESCRIPTIONS } from '@/lib/pollutant-descriptions';
 
 interface Props {
   pollutants: PollutantReading[];
   locale: 'en' | 'es';
 }
 
-const DESCRIPTIONS: Record<string, { nameEn: string; nameEs: string; descEn: string; descEs: string }> = {
-  'PM2.5': {
-    nameEn: 'Fine Particles (PM2.5)',
-    nameEs: 'Partículas finas (PM2.5)',
-    descEn: 'Tiny particles from vehicles, industry, and fires. Can reach deep into your lungs and worsen asthma.',
-    descEs: 'Partículas diminutas de vehículos, industria e incendios. Pueden llegar profundo a los pulmones y empeorar el asma.',
-  },
-  'Ozone': {
-    nameEn: 'Ground-Level Ozone',
-    nameEs: 'Ozono a nivel del suelo',
-    descEn: 'Forms when sunlight reacts with vehicle and factory exhaust. Makes breathing harder — especially for children.',
-    descEs: 'Se forma cuando la luz solar reacciona con el escape de autos y fábricas. Dificulta la respiración — especialmente para niños.',
-  },
-  'PM10': {
-    nameEn: 'Coarse Particles (PM10)',
-    nameEs: 'Partículas gruesas (PM10)',
-    descEn: 'Larger dust particles from construction and roads that irritate your nose, throat, and lungs.',
-    descEs: 'Partículas de polvo más grandes de la construcción y carreteras que irritan la nariz, garganta y pulmones.',
-  },
-  'NO2': {
-    nameEn: 'Nitrogen Dioxide (NO2)',
-    nameEs: 'Dióxido de nitrógeno (NO2)',
-    descEn: 'From vehicle exhaust and power plants. Irritates airways and increases risk of respiratory infections.',
-    descEs: 'Del escape de vehículos y plantas de energía. Irrita las vías respiratorias y aumenta el riesgo de infecciones.',
-  },
-  'CO': {
-    nameEn: 'Carbon Monoxide (CO)',
-    nameEs: 'Monóxido de carbono (CO)',
-    descEn: 'Produced by burning fuel. At high levels, limits oxygen in your blood.',
-    descEs: 'Producido al quemar combustible. En niveles altos, limita el oxígeno en la sangre.',
-  },
+const SECTION_LABEL = { en: "What's In Your Air", es: 'Qué hay en tu aire' };
+const WHO_NOTE = {
+  en: 'Health context: WHO Global Air Quality Guidelines (2021)',
+  es: 'Contexto de salud: Directrices de Calidad del Aire de la OMS (2021)',
 };
 
 export default function PollutantList({ pollutants, locale }: Props) {
@@ -44,33 +18,50 @@ export default function PollutantList({ pollutants, locale }: Props) {
 
   return (
     <div className="bg-white border border-cobalt/20 p-5">
-      <h3 className="text-[10px] font-semibold tracking-label uppercase text-cobalt mb-4">
-        {locale === 'es' ? 'Qué hay en tu aire' : "What's In Your Air"}
+      <h3
+        className="text-[10px] font-semibold uppercase text-cobalt mb-4"
+        style={{ letterSpacing: '0.15em' }}
+      >
+        {SECTION_LABEL[locale]}
       </h3>
-      <ul className="space-y-4">
+      <ul className="space-y-5">
         {top.map((p) => {
           const meta = getAqiMeta(p.category);
-          const desc = DESCRIPTIONS[p.parameterName];
-          const name = desc ? (locale === 'es' ? desc.nameEs : desc.nameEn) : p.parameterName;
+          const desc = POLLUTANT_DESCRIPTIONS[p.parameterName];
+          const name        = desc ? (locale === 'es' ? desc.nameEs : desc.nameEn) : p.parameterName;
           const description = desc ? (locale === 'es' ? desc.descEs : desc.descEn) : '';
+          const whoContext  = desc ? (locale === 'es' ? desc.whoContextEs : desc.whoContextEn) : '';
 
           return (
             <li key={p.parameterName} className="flex items-start gap-3">
               <div
-                className="w-2.5 h-2.5 mt-1 shrink-0"
+                className="w-2.5 h-2.5 mt-1.5 shrink-0"
                 style={{ backgroundColor: meta.colorHex }}
                 aria-hidden
               />
-              <div>
-                <p className="text-sm font-medium text-darkblue">{name}</p>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="text-sm font-medium text-darkblue">{name}</p>
+                  <span className="text-[11px] font-semibold text-darkblue/40">
+                    AQI {p.aqi}
+                  </span>
+                </div>
                 {description && (
-                  <p className="text-[13px] text-darkblue/60 mt-0.5 leading-snug">{description}</p>
+                  <p className="text-[13px] text-darkblue/60 leading-snug mb-1">{description}</p>
+                )}
+                {whoContext && (
+                  <p className="text-[11px] text-darkblue/40 leading-snug border-l-2 border-cobalt/20 pl-2">
+                    {whoContext}
+                  </p>
                 )}
               </div>
             </li>
           );
         })}
       </ul>
+      <p className="mt-4 pt-3 border-t border-cobalt/10 text-[10px] text-darkblue/30">
+        {WHO_NOTE[locale]}
+      </p>
     </div>
   );
 }

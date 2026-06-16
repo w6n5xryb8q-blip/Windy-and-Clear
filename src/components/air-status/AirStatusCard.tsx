@@ -5,9 +5,21 @@ import { AQHI_META, type AqhiCategory, type AqhiResult } from '@/lib/aqhi';
 interface Props {
   airData: AirQualityResult;
   aqhi: AqhiResult | null;
+  concentrationSource?: string;
   neighborhoodName: string;
   locale: 'en' | 'es';
 }
+
+const NO_SAFE_LEVEL = {
+  en: 'No level of air pollution is entirely risk-free — people with asthma, heart conditions, or lung disease should still take care.',
+  es: 'Ningún nivel de contaminación del aire es completamente seguro — las personas con asma, enfermedades cardíacas o pulmonares deben tomar precauciones.',
+};
+
+const SOURCE_LABELS: Record<string, string> = {
+  'airnow-data': 'AirNow (raw)',
+  'openaq':      'OpenAQ',
+  'none':        'AirNow (AQI)',
+};
 
 const NO_DATA_HEADLINE = {
   en: 'No air quality reading available for this area right now.',
@@ -23,7 +35,7 @@ const POLLUTANTS_LABEL = { en: 'From', es: 'De' };
 const UPDATED_LABEL = { en: 'Updated', es: 'Act.' };
 const HEALTH_RISK_LABEL = { en: 'Health Risk', es: 'Riesgo de Salud' };
 
-export default function AirStatusCard({ airData, aqhi, neighborhoodName, locale }: Props) {
+export default function AirStatusCard({ airData, aqhi, concentrationSource, neighborhoodName, locale }: Props) {
   const { overallAqi, overallCategory, observedAt, dataAvailable } = airData;
 
   // Determine display mode
@@ -116,17 +128,23 @@ export default function AirStatusCard({ airData, aqhi, neighborhoodName, locale 
       {/* Headline */}
       <p className="text-darkblue/70 text-[15px] leading-relaxed">{headline}</p>
 
-      {/* WHO attribution + pollutants used */}
+      {/* No safe level note — shown for low/moderate AQHI */}
+      {hasAqhi && aqhi && (aqhi.category === 'low' || aqhi.category === 'moderate') && (
+        <p className="mt-3 text-[11px] text-darkblue/50 leading-snug italic border-l-2 border-cobalt/20 pl-2">
+          {NO_SAFE_LEVEL[locale]}
+        </p>
+      )}
+
+      {/* Attribution: WHO methodology + data source */}
       {hasAqhi && aqhi && (
         <div className="mt-3 pt-3 border-t border-darkblue/10 flex flex-col gap-0.5">
           <p className="text-[10px] text-darkblue/40 leading-snug">
             {WHO_LABEL[locale]}
           </p>
-          {aqhi.pollutantsUsed.length > 0 && (
-            <p className="text-[10px] text-darkblue/35">
-              {POLLUTANTS_LABEL[locale]}: {aqhi.pollutantsUsed.join(', ')}
-            </p>
-          )}
+          <p className="text-[10px] text-darkblue/30">
+            {POLLUTANTS_LABEL[locale]}: {aqhi.pollutantsUsed.join(', ')}
+            {concentrationSource && ` · ${SOURCE_LABELS[concentrationSource] ?? concentrationSource}`}
+          </p>
         </div>
       )}
     </div>

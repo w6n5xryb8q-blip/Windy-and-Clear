@@ -2,14 +2,17 @@
 
 import { useState } from 'react';
 import type { AqiCategory } from '@/lib/aqi-utils';
+import type { AqhiCategory } from '@/lib/aqhi';
 import { SYMPTOM_TIERS, GROUNDING_TECHNIQUES, ROUTINE_GROUPS } from '@/lib/self-regulation-content';
 
 interface Props {
   category: AqiCategory;
+  aqhiCategory?: AqhiCategory | null;
   locale: 'en' | 'es';
 }
 
-const ALERT_CATEGORIES: AqiCategory[] = ['usg', 'unhealthy', 'veryUnhealthy', 'hazardous'];
+const EPA_ALERT: AqiCategory[]   = ['usg', 'unhealthy', 'veryUnhealthy', 'hazardous'];
+const AQHI_ALERT: AqhiCategory[] = ['high', 'veryHigh'];
 
 const STRINGS = {
   en: {
@@ -179,8 +182,10 @@ function RoutineCard({ group, locale }: { group: typeof ROUTINE_GROUPS[0]; local
   );
 }
 
-export default function SelfRegulationGuide({ category, locale }: Props) {
-  if (!ALERT_CATEGORIES.includes(category)) return null;
+export default function SelfRegulationGuide({ category, aqhiCategory, locale }: Props) {
+  const showByEpa  = EPA_ALERT.includes(category);
+  const showByAqhi = aqhiCategory != null && AQHI_ALERT.includes(aqhiCategory);
+  if (!showByEpa && !showByAqhi) return null;
 
   const s = STRINGS[locale];
 

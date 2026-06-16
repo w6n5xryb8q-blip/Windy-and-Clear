@@ -68,15 +68,24 @@ export default async function NeighborhoodPage({ params }: Props) {
       <AirStatusCard
         airData={airData}
         aqhi={concData.aqhi}
+        concentrationSource={concData.source}
         neighborhoodName={hoodName}
         locale={locale}
       />
 
       <SafetyPrecautions category={airData.overallCategory} locale={locale} />
 
-      <SelfCareGuide category={airData.overallCategory} locale={locale} />
+      <SelfCareGuide
+        category={airData.overallCategory}
+        aqhiCategory={concData.aqhi?.category ?? null}
+        locale={locale}
+      />
 
-      <SelfRegulationGuide category={airData.overallCategory} locale={locale} />
+      <SelfRegulationGuide
+        category={airData.overallCategory}
+        aqhiCategory={concData.aqhi?.category ?? null}
+        locale={locale}
+      />
 
       {airData.dataAvailable && airData.pollutants.length > 0 && (
         <PollutantList pollutants={airData.pollutants} locale={locale} />
@@ -97,8 +106,13 @@ export default async function NeighborhoodPage({ params }: Props) {
         locale={locale}
       />
 
-      <footer className="pt-6 pb-2 text-center text-xs text-gray-400">
-        {t('footer.dataSource')}
+      <footer className="pt-6 pb-4 text-center space-y-1.5">
+        <p className="text-xs text-gray-400">{t('footer.dataSource')}</p>
+        <p className="text-[10px] text-gray-400/70 leading-relaxed max-w-xs mx-auto">
+          {locale === 'es'
+            ? 'Riesgo de salud calculado usando la metodología del Índice de Salud de la Calidad del Aire de Canadá (AQHI), avalada por la OMS. Datos de contaminantes: US EPA AirNow y OpenAQ.'
+            : 'Health risk score uses the Canadian Air Quality Health Index (AQHI) methodology, endorsed by WHO. Pollutant data: US EPA AirNow and OpenAQ.'}
+        </p>
       </footer>
     </div>
   );
