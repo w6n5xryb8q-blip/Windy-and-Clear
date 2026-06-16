@@ -10,8 +10,8 @@ CREATE TABLE community_reports (
   report_text   TEXT NOT NULL CHECK (char_length(report_text) BETWEEN 10 AND 1000),
   language      TEXT NOT NULL DEFAULT 'en' CHECK (language IN ('en', 'es')),
   ip_hash       TEXT,
-  is_moderated  BOOLEAN NOT NULL DEFAULT true,
-  is_visible    BOOLEAN NOT NULL DEFAULT true
+  is_moderated  BOOLEAN NOT NULL DEFAULT false,
+  is_visible    BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE INDEX idx_reports_neighborhood_time

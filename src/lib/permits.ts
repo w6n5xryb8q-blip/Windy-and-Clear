@@ -36,7 +36,7 @@ export async function fetchPermits(communityAreaNumber: number): Promise<Permits
     '$where',
     `issue_date >= '${thirtyDaysAgo}T00:00:00.000' AND community_area = '${communityAreaNumber}'`
   );
-  url.searchParams.set('$limit', '10');
+  url.searchParams.set('$limit', '50');
   url.searchParams.set(
     '$select',
     'permit_,issue_date,work_description,street_number,street_direction,street_name,suffix,permit_type,reported_cost'
