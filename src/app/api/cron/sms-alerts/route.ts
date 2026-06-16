@@ -60,8 +60,6 @@ export async function GET(request: NextRequest) {
     }
   });
 
-  const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-  const fromNumber = process.env.TWILIO_PHONE_NUMBER!;
   const now = new Date();
   const cutoff = new Date(now.getTime() - ALERT_COOLDOWN_HOURS * 60 * 60 * 1000);
 
@@ -72,6 +70,17 @@ export async function GET(request: NextRequest) {
     return !lastAlert || lastAlert <= cutoff;
   });
 
+  const twilioSid   = process.env.TWILIO_ACCOUNT_SID;
+  const twilioToken = process.env.TWILIO_AUTH_TOKEN;
+  const fromNumber  = process.env.TWILIO_PHONE_NUMBER;
+
+  // Skip SMS if Twilio is not yet configured — cron still runs and reports counts
+  if (!twilioSid || !twilioToken || !fromNumber) {
+    console.log(`[sms-alerts] Twilio not configured — ${qualifying.length} alerts pending, none sent.`);
+    return NextResponse.json({ processed: allSubs.length, qualifying: qualifying.length, sent: 0, smsEnabled: false });
+  }
+
+  const client = twilio(twilioSid, twilioToken);
   let sent = 0;
 
   // Send SMS in parallel batches — avoid sequential serialization
@@ -93,5 +102,5 @@ export async function GET(request: NextRequest) {
     }
   });
 
-  return NextResponse.json({ processed: allSubs.length, qualifying: qualifying.length, sent });
+  return NextResponse.json({ processed: allSubs.length, qualifying: qualifying.length, sent, smsEnabled: true });
 }
