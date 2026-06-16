@@ -26,16 +26,14 @@ export interface ConcentrationResult {
 
 // Mock concentrations for local dev (AIRNOW_MOCK=true)
 // PM2.5=12 µg/m³ + O3=60 µg/m³ → AQHI ≈ 3 (Low Risk)
-const MOCK_CONCENTRATIONS: ConcentrationResult = (() => {
-  const { calculateAqhiFromConcentrations } = require('./aqhi');
-  const concs = { pm25: 12.0, o3: 60.0, no2: null };
-  return {
-    ...concs,
-    measuredAt: new Date().toISOString(),
-    source: 'airnow-data' as ConcentrationSource,
-    aqhi: calculateAqhiFromConcentrations(concs),
-  };
-})();
+const MOCK_CONCS = { pm25: 12.0, o3: 60.0, no2: null };
+const MOCK_AQHI  = calculateAqhiFromConcentrations(MOCK_CONCS);
+const MOCK_CONCENTRATIONS: ConcentrationResult = {
+  ...MOCK_CONCS,
+  measuredAt: null,
+  source: 'airnow-data',
+  aqhi: MOCK_AQHI.pollutantsUsed.length > 0 ? MOCK_AQHI : null,
+};
 
 export async function fetchConcentrationsForAqhi(): Promise<ConcentrationResult> {
   if (process.env.AIRNOW_MOCK === 'true') return MOCK_CONCENTRATIONS;
