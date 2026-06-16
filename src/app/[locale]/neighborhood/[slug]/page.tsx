@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { getNeighborhoodBySlug, neighborhoods } from '@/data/neighborhoods';
 import { fetchAirQuality } from '@/lib/airnow';
 import { fetchPermits } from '@/lib/permits';
+import { fetchConcentrationsForAqhi } from '@/lib/fetch-concentrations';
 import AirStatusCard from '@/components/air-status/AirStatusCard';
 import SafetyPrecautions from '@/components/safety/SafetyPrecautions';
 import SelfCareGuide from '@/components/safety/SelfCareGuide';
@@ -39,9 +40,10 @@ export default async function NeighborhoodPage({ params }: Props) {
 
   const t = await getTranslations({ locale: params.locale });
 
-  const [airData, permitsData] = await Promise.all([
-    fetchAirQuality(hood.primaryZip),
+  const [airData, permitsData, concData] = await Promise.all([
+    fetchAirQuality(hood.primaryZip),           // EPA AQI — independent
     fetchPermits(hood.communityAreaNumber),
+    fetchConcentrationsForAqhi(),               // AQHI — independent
   ]);
 
   const locale = params.locale as 'en' | 'es';
@@ -65,6 +67,7 @@ export default async function NeighborhoodPage({ params }: Props) {
 
       <AirStatusCard
         airData={airData}
+        aqhi={concData.aqhi}
         neighborhoodName={hoodName}
         locale={locale}
       />

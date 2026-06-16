@@ -1,9 +1,10 @@
 import type { AirQualityResult } from '@/lib/airnow';
 import { getAqiMeta } from '@/lib/aqi-utils';
-import { AQHI_META, type AqhiCategory } from '@/lib/aqhi';
+import { AQHI_META, type AqhiCategory, type AqhiResult } from '@/lib/aqhi';
 
 interface Props {
   airData: AirQualityResult;
+  aqhi: AqhiResult | null;
   neighborhoodName: string;
   locale: 'en' | 'es';
 }
@@ -22,8 +23,8 @@ const POLLUTANTS_LABEL = { en: 'From', es: 'De' };
 const UPDATED_LABEL = { en: 'Updated', es: 'Act.' };
 const HEALTH_RISK_LABEL = { en: 'Health Risk', es: 'Riesgo de Salud' };
 
-export default function AirStatusCard({ airData, neighborhoodName, locale }: Props) {
-  const { aqhi, overallAqi, overallCategory, observedAt, dataAvailable } = airData;
+export default function AirStatusCard({ airData, aqhi, neighborhoodName, locale }: Props) {
+  const { overallAqi, overallCategory, observedAt, dataAvailable } = airData;
 
   // Determine display mode
   const hasAqhi = aqhi !== null && dataAvailable;

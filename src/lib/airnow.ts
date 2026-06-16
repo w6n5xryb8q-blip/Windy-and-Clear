@@ -1,5 +1,4 @@
 import { airnowCategoryToAqiCategory, maxCategory, type AqiCategory } from './aqi-utils';
-import { calculateAqhi, type AqhiResult } from './aqhi';
 
 const AIRNOW_BASE = 'https://www.airnowapi.org/aq/observation/zipCode/current/';
 
@@ -18,7 +17,6 @@ export interface AirQualityResult {
   pollutants: PollutantReading[];
   dataAvailable: boolean;
   stale?: boolean;
-  aqhi: AqhiResult | null;
 }
 
 interface AirNowObservation {
@@ -143,7 +141,6 @@ function buildResult(zip: string, observations: AirNowObservation[]): AirQuality
     overallAqi,
     pollutants,
     dataAvailable: true,
-    aqhi: calculateAqhi(pollutants),
   };
 }
 
@@ -155,6 +152,5 @@ function noDataResult(zip: string): AirQualityResult {
     overallAqi: 0,
     pollutants: [],
     dataAvailable: false,
-    aqhi: null,
   };
 }

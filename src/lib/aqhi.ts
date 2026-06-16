@@ -74,6 +74,44 @@ export interface AqhiResult {
   pollutantsUsed: string[];
 }
 
+/**
+ * Primary path: compute AQHI directly from raw concentrations in µg/m³.
+ * This is the genuine Canadian formula — no reverse-engineering required.
+ */
+export function calculateAqhiFromConcentrations(concs: {
+  pm25?: number | null;
+  o3?:   number | null;
+  no2?:  number | null;
+}): AqhiResult {
+  const used: string[] = [];
+
+  const pm25 = concs.pm25 != null && concs.pm25 >= 0
+    ? (used.push('PM2.5'), Math.exp(0.000487 * concs.pm25) - 1)
+    : 0;
+  const o3 = concs.o3 != null && concs.o3 >= 0
+    ? (used.push('O₃'), Math.exp(0.000537 * concs.o3) - 1)
+    : 0;
+  const no2 = concs.no2 != null && concs.no2 >= 0
+    ? (used.push('NO₂'), Math.exp(0.000871 * concs.no2) - 1)
+    : 0;
+
+  const raw   = (1000 / 10.4) * (no2 + o3 + pm25);
+  const score = Math.max(1, Math.min(Math.round(raw), 11));
+
+  return {
+    score,
+    display:        score >= 11 ? '10+' : String(score),
+    category:       aqhiToCategory(score),
+    pollutantsUsed: used,
+  };
+}
+
+/**
+ * Fallback path: derive approximate concentrations from EPA AQI values, then
+ * compute AQHI. Less accurate than calculateAqhiFromConcentrations() because
+ * EPA AQI is single-pollutant and piecewise-linear, but useful when raw
+ * concentration data is unavailable.
+ */
 export function calculateAqhi(
   pollutants: { parameterName: string; aqi: number }[]
 ): AqhiResult {
